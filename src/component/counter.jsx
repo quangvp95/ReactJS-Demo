@@ -3,21 +3,56 @@ import React, { Component } from "react";
 class Counter extends Component {
   state = {
     count: 0,
+    imageUrl: "https://picsum.photos/200",
     address: {},
+    tags: ["tag1", "tag2", `tag3`],
+  };
+
+  style = {
+    fontSize: 20,
+    fontWeight: "bold",
   };
 
   render() {
+    let classes = this.getBadgeClasses();
+
     return (
-      <React.Fragment>
-        <span>Count is {this.formatCount()}</span>
-        <button>Increment</button>
-      </React.Fragment>
+      <div>
+        {/* <img src={this.state.imageUrl} /> */}
+        <span style={this.style} className={classes}>
+          {this.formatCount()}
+        </span>
+        <button
+          style={{ fontSize: 20 }}
+          onClick={this.increment()}
+          className="btn btn-secondary btn-sm"
+        >
+          Increment
+        </button>
+        <ul>
+          {this.state.tags.map((t) => (
+            <li style={{ fontSize: 20 }} key={t}>
+              This is {t}
+            </li>
+          ))}
+        </ul>
+      </div>
     );
+  }
+
+  getBadgeClasses() {
+    let classes = `badge m-2 `;
+    classes += "badge-" + (this.state.count === 0 ? "warning" : "primary");
+    return classes;
   }
 
   formatCount() {
     const { count, address } = this.state;
     return count === 0 ? <h1>Zero</h1> : count;
+  }
+
+  increment() {
+    this.state.count++;
   }
 }
 
