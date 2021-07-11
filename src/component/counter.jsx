@@ -13,8 +13,28 @@ class Counter extends Component {
     fontWeight: "bold",
   };
 
+  constructor() {
+    super();
+    this.increment = this.increment.bind(this);
+  }
+
+  renderTags() {
+    if (!this.state.tags || this.state.tags.length === 0)
+      return <p>No tags!</p>;
+    return (
+      <ul>
+        {this.state.tags.map((t) => (
+          <li style={{ fontSize: 20 }} key={t}>
+            This is {t}
+          </li>
+        ))}
+      </ul>
+    );
+  }
+
   render() {
     let classes = this.getBadgeClasses();
+    console.log("increment " + this.state.count);
 
     return (
       <div>
@@ -24,18 +44,14 @@ class Counter extends Component {
         </span>
         <button
           style={{ fontSize: 20 }}
-          onClick={this.increment()}
+          onClick={() => {
+            this.handleIncrement("Test", 1);
+          }}
           className="btn btn-secondary btn-sm"
         >
           Increment
         </button>
-        <ul>
-          {this.state.tags.map((t) => (
-            <li style={{ fontSize: 20 }} key={t}>
-              This is {t}
-            </li>
-          ))}
-        </ul>
+        {this.renderTags()}
       </div>
     );
   }
@@ -52,8 +68,14 @@ class Counter extends Component {
   }
 
   increment() {
-    this.state.count++;
+    console.log("increment " + this.state.count);
+    this.setState({ count: this.state.count + 1 });
   }
+
+  handleIncrement = (name, product) => {
+    console.log(name + " " + product);
+    this.increment();
+  };
 }
 
 export default Counter;
