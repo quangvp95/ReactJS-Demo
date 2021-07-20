@@ -4,11 +4,11 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import Counter from './component/counter';
+import Counters from './component/counters';
 
 ReactDOM.render(
   <React.StrictMode>
-    <Counter />
-    <App/>
+    <App/>  
   </React.StrictMode>,
   document.getElementById('root')
 );
