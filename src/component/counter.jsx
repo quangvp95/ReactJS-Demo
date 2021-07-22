@@ -31,6 +31,9 @@ class Counter extends Component {
       </ul>
     );
   }
+  componentWillUnmount() {
+    console.log("componentWillUnmount1", this.props);
+  }
 
   render() {
     let classes = this.getBadgeClasses();
